@@ -1,5 +1,6 @@
 package com.abnamro.recipes.infra.service;
 
+import com.abnamro.recipes.domain.exception.ResourceNotFoundException;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.abnamro.recipes.domain.service.RecipeService;
 import com.abnamro.recipes.infra.data.entity.RecipeEntity;
@@ -28,12 +29,13 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe retrieveRecipe(final UUID id) {
-        return this.recipeJpaRepository.findById(id).orElseThrow().toModel();
+        return this.getRecipeById(id).toModel();
     }
+
 
     @Override
     public Recipe updateRecipe(final UUID id, final Recipe recipe) {
-        final RecipeEntity recipeEntity = this.recipeJpaRepository.findById(id).orElseThrow();
+        final RecipeEntity recipeEntity = this.getRecipeById(id);
 
         this.setAttributes(recipeEntity, recipe);
 
@@ -42,7 +44,15 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void deleteRecipe(final UUID id) {
+        if (!this.recipeJpaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Recipe not found by id: " + id);
+        }
         this.recipeJpaRepository.deleteById(id);
+    }
+
+    private RecipeEntity getRecipeById(final UUID id) {
+        return this.recipeJpaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found by id: " + id));
     }
 
     private void setAttributes(final RecipeEntity recipeEntity, final Recipe recipe) {

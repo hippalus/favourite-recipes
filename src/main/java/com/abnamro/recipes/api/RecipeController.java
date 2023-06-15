@@ -5,6 +5,7 @@ import com.abnamro.recipes.api.request.UpdateRecipeRequest;
 import com.abnamro.recipes.api.response.RecipeResponse;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.abnamro.recipes.domain.service.RecipeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,8 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @PostMapping
-    public ResponseEntity<RecipeResponse> createRecipe(@RequestBody final CreateRecipeRequest request) {
+    public ResponseEntity<RecipeResponse> createRecipe(@Valid @RequestBody final CreateRecipeRequest request) {
+
         final Recipe recipe = this.recipeService.createRecipe(request.toModel());
 
         final RecipeResponse recipeResponse = RecipeResponse.from(recipe);
@@ -38,7 +40,7 @@ public class RecipeController {
     @PutMapping("/{id}")
     public ResponseEntity<RecipeResponse> updateRecipe(
             @PathVariable final UUID id,
-            @RequestBody final UpdateRecipeRequest request) {
+            @Valid @RequestBody final UpdateRecipeRequest request) {
         final Recipe recipe = this.recipeService.updateRecipe(id, request.toModel());
 
         return ResponseEntity.ok(RecipeResponse.from(recipe));
