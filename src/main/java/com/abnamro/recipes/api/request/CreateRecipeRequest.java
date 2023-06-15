@@ -12,15 +12,21 @@ public record CreateRecipeRequest(
         @NotNull
         @NotBlank
         String name,
-        boolean isVegetarian,
+
+        @NotNull
+        Boolean isVegetarian,
+
         @Min(1)
         Integer servings,
+
         @Size(min = 1)
         Set<String> ingredients,
+
         @NotNull
         @NotBlank
         String instructions
 ) {
+
     public Recipe toModel() {
         return new Recipe(
                 this.name,

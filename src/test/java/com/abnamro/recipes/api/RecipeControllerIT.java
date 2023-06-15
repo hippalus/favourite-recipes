@@ -31,7 +31,6 @@ class RecipeControllerIT extends AbstractIT {
 
     private static final Faker faker = new Faker();
 
-
     @Test
     void testCreateRecipe() {
         // Prepare the request body
@@ -107,7 +106,6 @@ class RecipeControllerIT extends AbstractIT {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getDetail()).contains("Wrong fields", "instructions must not be blank", "instructions must not be null");
-
     }
 
     @Test
@@ -203,6 +201,48 @@ class RecipeControllerIT extends AbstractIT {
         // Verify the response status code and body
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.getBody().getDetail()).isEqualTo("Recipe not found by id: " + recipeId);
+    }
+
+    @Test
+    void testUpdateRecipe_InvalidRequest_BlankName() {
+        final UUID recipeId = UUID.fromString("28aa5a21-9940-4db2-adb1-41d2c6528af2");
+
+        // Prepare the request body with blank name
+        final UpdateRecipeRequest request = new UpdateRecipeRequest("", true, 4, Set.of("Ingredient 1", "Ingredient 2"), "Instructions");
+
+        // Perform the PUT request
+        final ResponseEntity<ProblemDetail> response = this.testRestTemplate.exchange("/recipes/{id}", HttpMethod.PUT, new HttpEntity<>(request), ProblemDetail.class, recipeId);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getBody().getDetail()).isEqualTo("Wrong fields : name must not be blank");
+    }
+
+    @Test
+    void testUpdateRecipe_InvalidRequest_NullInstructions() {
+        final UUID recipeId = UUID.fromString("28aa5a21-9940-4db2-adb1-41d2c6528af2");
+
+        // Prepare the request body with null instructions
+        final UpdateRecipeRequest request = new UpdateRecipeRequest("Recipe 1", true, 4, Set.of("Ingredient 1", "Ingredient 2"), null);
+
+        // Perform the PUT request
+        final ResponseEntity<ProblemDetail> response = this.testRestTemplate.exchange("/recipes/{id}", HttpMethod.PUT, new HttpEntity<>(request), ProblemDetail.class, recipeId);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getBody().getDetail()).contains("Wrong fields", "instructions must not be blank", "instructions must not be null");
+    }
+
+    @Test
+    void testUpdateRecipe_InvalidRequest_InvalidServings() {
+        final UUID recipeId = UUID.fromString("28aa5a21-9940-4db2-adb1-41d2c6528af2");
+
+        // Prepare the request body with null instructions
+        final UpdateRecipeRequest request = new UpdateRecipeRequest("Recipe 1", false, 0, Set.of("Ingredient 1", "Ingredient 2"), null);
+
+        // Perform the PUT request
+        final ResponseEntity<ProblemDetail> response = this.testRestTemplate.exchange("/recipes/{id}", HttpMethod.PUT, new HttpEntity<>(request), ProblemDetail.class, recipeId);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getBody().getDetail()).contains("Wrong fields", "instructions must not be blank", "instructions must not be null");
     }
 
     @Test
