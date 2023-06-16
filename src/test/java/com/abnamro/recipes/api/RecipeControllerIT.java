@@ -1,10 +1,10 @@
 package com.abnamro.recipes.api;
 
-import com.abnamro.recipes.AbstractIT;
-import com.abnamro.recipes.IT;
 import com.abnamro.recipes.api.request.CreateRecipeRequest;
 import com.abnamro.recipes.api.request.UpdateRecipeRequest;
 import com.abnamro.recipes.api.response.RecipeResponse;
+import com.abnamro.recipes.common.AbstractIT;
+import com.abnamro.recipes.common.IT;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -200,7 +201,7 @@ class RecipeControllerIT extends AbstractIT {
 
         // Verify the response status code and body
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.getBody().getDetail()).isEqualTo("Recipe not found by id: " + recipeId);
+        assertThat(Objects.requireNonNull(response.getBody()).getDetail()).isEqualTo("Recipe not found by id: " + recipeId);
     }
 
     @Test

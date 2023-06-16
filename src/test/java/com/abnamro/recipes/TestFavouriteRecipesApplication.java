@@ -1,22 +1,14 @@
 package com.abnamro.recipes;
 
+import com.abnamro.recipes.common.IntegrationTestConfiguration;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.Bean;
-import org.testcontainers.containers.PostgreSQLContainer;
 
-@TestConfiguration(proxyBeanMethods = false)
 public class TestFavouriteRecipesApplication {
 
-	@Bean
-	@ServiceConnection
-	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>("postgres:latest");
-	}
-
-	public static void main(final String[] args) {
-		SpringApplication.from(FavouriteRecipesApplication::main).with(TestFavouriteRecipesApplication.class).run(args);
-	}
+    public static void main(final String[] args) {
+        SpringApplication.from(FavouriteRecipesApplication::main)
+                .with(IntegrationTestConfiguration.class)
+                .run(args);
+    }
 
 }
