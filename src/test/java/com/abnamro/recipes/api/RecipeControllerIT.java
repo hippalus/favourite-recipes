@@ -122,11 +122,11 @@ class RecipeControllerIT extends AbstractIT {
         final RecipeResponse responseBody = response.getBody();
         assertThat(responseBody).isNotNull()
                 .returns(recipeId, RecipeResponse::id)
-                .returns("string", RecipeResponse::name)
-                .returns(1, RecipeResponse::servings)
+                .returns("Recipe 6", RecipeResponse::name)
+                .returns(4, RecipeResponse::servings)
                 .returns(true, RecipeResponse::isVegetarian)
-                .returns(Set.of("string"), RecipeResponse::ingredients)
-                .returns("string", RecipeResponse::instructions)
+                .returns(Set.of("Ingredient 6"), RecipeResponse::ingredients)
+                .returns("Instructions for Recipe 6", RecipeResponse::instructions)
                 .returns(ZonedDateTime.parse("2023-06-15T15:33:06.468289Z"), RecipeResponse::createdDate)
                 .returns(ZonedDateTime.parse("2023-06-15T15:33:06.468427Z"), RecipeResponse::lastModifiedDate);
     }

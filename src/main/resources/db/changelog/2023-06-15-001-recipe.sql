@@ -7,7 +7,7 @@ CREATE TABLE recipe
     name               VARCHAR(255),
     is_vegetarian      BOOLEAN NOT NULL,
     servings           INTEGER,
-    instructions       VARCHAR(255),
+    instructions       TEXT,
     created_date       TIMESTAMP WITHOUT TIME ZONE,
     last_modified_date TIMESTAMP WITHOUT TIME ZONE,
     PRIMARY KEY (id)
