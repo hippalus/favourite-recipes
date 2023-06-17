@@ -7,6 +7,7 @@ import com.abnamro.recipes.infra.data.entity.RecipeEntity;
 import com.abnamro.recipes.infra.data.repository.RecipeJpaRepository;
 import com.abnamro.recipes.infra.data.specification.RecipeSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ public class RecipeSearchServiceImpl implements RecipeSearchService {
 
     @Override
     public List<Recipe> searchRecipes(final RecipeSearchCriteria searchCriteria) {
-        final RecipeSpecification specification = new RecipeSpecification(searchCriteria);
+        final Specification<RecipeEntity> specification = new RecipeSpecification(searchCriteria);
 
         return this.recipeJpaRepository.findAll(specification, searchCriteria.pageable())
                 .stream()

@@ -1,11 +1,10 @@
 package com.abnamro.recipes.infra.service;
 
+import com.abnamro.recipes.common.TestFixture;
 import com.abnamro.recipes.domain.exception.ResourceNotFoundException;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.abnamro.recipes.infra.data.entity.RecipeEntity;
 import com.abnamro.recipes.infra.data.repository.RecipeJpaRepository;
-import com.github.javafaker.Faker;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,9 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
+import static com.abnamro.recipes.common.TestFixture.createRecipes;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,7 +26,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 class RecipeServiceImplTest {
 
-    private static final Faker faker = new Faker();
 
     @Mock
     private RecipeJpaRepository recipeJpaRepository;
@@ -44,7 +41,7 @@ class RecipeServiceImplTest {
     @Test
     void testCreateRecipe() {
         // Prepare the input
-        final TestRecipes testRecipes = createRecipes();
+        final TestFixture.TestRecipes testRecipes = createRecipes();
 
         when(this.recipeJpaRepository.save(any())).thenReturn(testRecipes.recipeEntity());
 
@@ -59,7 +56,7 @@ class RecipeServiceImplTest {
 
     @Test
     void testRetrieveRecipe() {
-        final TestRecipes testRecipes = createRecipes();
+        final TestFixture.TestRecipes testRecipes = createRecipes();
 
         final RecipeEntity recipeEntity = testRecipes.recipeEntity();
         when(this.recipeJpaRepository.findById(any())).thenReturn(Optional.of(recipeEntity));
@@ -89,13 +86,13 @@ class RecipeServiceImplTest {
 
     @Test
     void testUpdateRecipe() {
-        final TestRecipes existingRecipes = createRecipes();
+        final TestFixture.TestRecipes existingRecipes = createRecipes();
         final RecipeEntity existingRecipeEntity = existingRecipes.recipeEntity();
         final UUID recipeEntityId = existingRecipeEntity.getId();
 
         when(this.recipeJpaRepository.findById(recipeEntityId)).thenReturn(Optional.of(existingRecipeEntity));
 
-        final TestRecipes updatedRecipes = createRecipes();
+        final TestFixture.TestRecipes updatedRecipes = createRecipes();
         final RecipeEntity updatedEntity = updatedRecipes.recipeEntity();
         updatedEntity.setId(recipeEntityId);
 
@@ -151,26 +148,5 @@ class RecipeServiceImplTest {
         verify(this.recipeJpaRepository, never()).deleteById(recipeId);
     }
 
-    @NotNull
-    static TestRecipes createRecipes() {
-        final Recipe recipe = Recipe.builder()
-                .name(faker.food().dish())
-                .vegetarian(faker.bool().bool())
-                .ingredients(IntStream.rangeClosed(0, 10).mapToObj(i -> faker.food().ingredient()).collect(Collectors.toSet()))
-                .servings(faker.number().randomDigit())
-                .instructions(faker.shakespeare().romeoAndJulietQuote())
-                .build();
 
-        final RecipeEntity recipeEntity = new RecipeEntity();
-        recipeEntity.setId(UUID.randomUUID());
-        recipeEntity.setName(recipe.name());
-        recipeEntity.setServings(recipe.servings());
-        recipeEntity.setIngredients(recipe.ingredients());
-        recipeEntity.setInstructions(recipe.instructions());
-
-        return new TestRecipes(recipe, recipeEntity);
-    }
-
-    record TestRecipes(Recipe recipe, RecipeEntity recipeEntity) {
-    }
 }
