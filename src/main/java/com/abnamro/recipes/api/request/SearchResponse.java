@@ -6,7 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
-public record SearchResponse(List<RecipeResponse> data) {
+public record SearchResponse(List<RecipeResponse> recipes) {
 
     public static SearchResponse from(final List<Recipe> searchedRecipes) {
         if (CollectionUtils.isEmpty(searchedRecipes)) {

@@ -50,7 +50,7 @@ class RecipeSearchControllerIT extends AbstractIT {
         // Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().data()).isNotEmpty();
+        assertThat(response.getBody().recipes()).isNotEmpty();
     }
 
 
@@ -61,7 +61,7 @@ class RecipeSearchControllerIT extends AbstractIT {
                 .build();
 
 
-        // Constructing the actual response with sample recipe data
+        // Constructing the actual response with sample recipe recipes
         final List<RecipeResponse> recipes = getRecipes();
         final SearchResponse expectedResponse = new SearchResponse(recipes);
 
