@@ -67,7 +67,7 @@ class RecipeControllerIT extends AbstractIT {
                 .returns(recipe.servings(), RecipeResponse::servings)
                 .returns(recipe.ingredients(), RecipeResponse::ingredients)
                 .returns(recipe.instructions(), RecipeResponse::instructions)
-                .returns(recipe.vegetarian(), RecipeResponse::isVegetarian);
+                .returns(recipe.vegetarian(), RecipeResponse::vegetarian);
 
         assertThat(responseBody.createdDate()).isNotNull();
         assertThat(responseBody.lastModifiedDate()).isNotNull();
@@ -125,7 +125,7 @@ class RecipeControllerIT extends AbstractIT {
                 .returns(recipeId, RecipeResponse::id)
                 .returns("Recipe 6", RecipeResponse::name)
                 .returns(4, RecipeResponse::servings)
-                .returns(true, RecipeResponse::isVegetarian)
+                .returns(true, RecipeResponse::vegetarian)
                 .returns(Set.of("Ingredient 6"), RecipeResponse::ingredients)
                 .returns("Instructions for Recipe 6", RecipeResponse::instructions)
                 .returns(ZonedDateTime.parse("2023-06-15T15:33:06.468289Z"), RecipeResponse::createdDate)

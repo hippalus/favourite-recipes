@@ -1,9 +1,9 @@
 package com.abnamro.recipes.api;
 
 import com.abnamro.recipes.api.request.SearchResponse;
+import com.abnamro.recipes.api.response.RecipeResponse;
 import com.abnamro.recipes.common.AbstractIT;
 import com.abnamro.recipes.common.IT;
-import com.abnamro.recipes.domain.model.Recipe;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.*;
 import org.springframework.test.context.jdbc.Sql;
@@ -62,7 +62,7 @@ class RecipeSearchControllerIT extends AbstractIT {
 
 
         // Constructing the actual response with sample recipe data
-        final List<Recipe> recipes = getRecipes();
+        final List<RecipeResponse> recipes = getRecipes();
         final SearchResponse expectedResponse = new SearchResponse(recipes);
 
 
@@ -106,7 +106,7 @@ class RecipeSearchControllerIT extends AbstractIT {
                 .queryParam("size", 2)
                 .build();
 
-        final List<Recipe> recipes = getRecipes();
+        final List<RecipeResponse> recipes = getRecipes();
 
         final SearchResponse expectedResponse = new SearchResponse(recipes.subList(2, 4));
 
@@ -132,7 +132,7 @@ class RecipeSearchControllerIT extends AbstractIT {
                 .queryParam("searchText", "nonexistent")
                 .build();
 
-        final List<Recipe> emptyList = Collections.emptyList();
+        final List<RecipeResponse> emptyList = Collections.emptyList();
         final SearchResponse expectedResponse = new SearchResponse(emptyList);
 
         // When

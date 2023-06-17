@@ -6,10 +6,10 @@ CREATE TABLE recipe
     id                 UUID    NOT NULL,
     name               VARCHAR(255),
     vegetarian         BOOLEAN NOT NULL,
-    servings           INTEGER,
-    instructions       TEXT,
-    created_date       TIMESTAMP WITHOUT TIME ZONE,
-    last_modified_date TIMESTAMP WITHOUT TIME ZONE,
+    servings           INTEGER NOT NULL,
+    instructions       TEXT    NOT NULL,
+    created_date       TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    last_modified_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     PRIMARY KEY (id)
 );
 

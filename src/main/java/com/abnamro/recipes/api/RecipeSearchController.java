@@ -42,7 +42,7 @@ public class RecipeSearchController {
 
         final List<Recipe> searchedRecipes = this.recipeSearchService.searchRecipes(searchCriteria);
 
-        return new SearchResponse(searchedRecipes);
+        return SearchResponse.from(searchedRecipes);
     }
 
 }

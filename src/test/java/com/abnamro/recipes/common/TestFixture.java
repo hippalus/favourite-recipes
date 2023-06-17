@@ -1,5 +1,6 @@
 package com.abnamro.recipes.common;
 
+import com.abnamro.recipes.api.response.RecipeResponse;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.abnamro.recipes.infra.data.entity.RecipeEntity;
 import com.github.javafaker.Faker;
@@ -20,9 +21,9 @@ public final class TestFixture {
 
     private static final Faker faker = new Faker();
 
-    public static List<Recipe> getRecipes() {
+    public static List<RecipeResponse> getRecipes() {
         return List.of(
-                new Recipe(
+                new RecipeResponse(
                         UUID.fromString("183c75b3-6ec3-43cd-a5d8-3f12173df80d"),
                         "Recipe 7",
                         false,
@@ -32,7 +33,7 @@ public final class TestFixture {
                         ZonedDateTime.parse("2023-06-15T21:34:43.568467Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                         ZonedDateTime.parse("2023-06-15T21:34:43.568488Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                 ),
-                new Recipe(
+                new RecipeResponse(
                         UUID.fromString("6ebf7c4d-7bb7-4a16-82c2-f4ac93222bbc"),
                         "Recipe 6",
                         true,
@@ -42,7 +43,7 @@ public final class TestFixture {
                         ZonedDateTime.parse("2023-06-15T15:33:06.468289Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                         ZonedDateTime.parse("2023-06-15T15:33:06.468427Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                 ),
-                new Recipe(
+                new RecipeResponse(
                         UUID.fromString("a26bc586-bf65-4a21-8732-7bbadab63464"),
                         "Recipe 5",
                         true,
@@ -52,7 +53,7 @@ public final class TestFixture {
                         ZonedDateTime.parse("2023-06-15T15:31:19.799439Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                         ZonedDateTime.parse("2023-06-15T15:31:19.799459Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                 ),
-                new Recipe(
+                new RecipeResponse(
                         UUID.fromString("30d0ffa3-6b33-4925-bef0-4868708e06ce"),
                         "Recipe 4",
                         false,
@@ -62,7 +63,7 @@ public final class TestFixture {
                         ZonedDateTime.parse("2023-06-15T13:30:31.291956Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                         ZonedDateTime.parse("2023-06-15T13:30:31.292043Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                 ),
-                new Recipe(
+                new RecipeResponse(
                         UUID.fromString("12988cfc-7547-45a4-8ed6-7a6379eb078d"),
                         "Recipe 3",
                         true,
@@ -72,7 +73,7 @@ public final class TestFixture {
                         ZonedDateTime.parse("2023-06-15T13:30:27.343721Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                         ZonedDateTime.parse("2023-06-15T13:30:27.343750Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                 ),
-                new Recipe(
+                new RecipeResponse(
                         UUID.fromString("6e4ab6fc-37de-4196-b992-902443745275"),
                         "Recipe 2",
                         false,
@@ -81,7 +82,7 @@ public final class TestFixture {
                         "Instructions for Recipe 2",
                         ZonedDateTime.parse("2023-06-15T13:27:59.001520Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
                         ZonedDateTime.parse("2023-06-15T13:27:59.001560Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                ), new Recipe(
+                ), new RecipeResponse(
                         UUID.fromString("28aa5a21-9940-4db2-adb1-41d2c6528af2"),
                         "Recipe 1",
                         true,
