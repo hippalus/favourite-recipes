@@ -1,9 +1,12 @@
 package com.abnamro.recipes.domain.model;
 
+import lombok.Builder;
+
 import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+@Builder
 public record Recipe(
         UUID id,
         String name,
@@ -14,7 +17,5 @@ public record Recipe(
         ZonedDateTime createdDate,
         ZonedDateTime lastModifiedDate
 ) {
-    public Recipe(final String name, final boolean isVegetarian, final Integer servings, final Set<String> ingredients, final String instructions) {
-        this(null, name, isVegetarian, servings, ingredients, instructions, null, null);
-    }
+
 }

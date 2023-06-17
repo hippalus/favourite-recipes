@@ -27,6 +27,12 @@ public record UpdateRecipeRequest(
 ) {
 
     public Recipe toModel() {
-        return new Recipe(this.name, this.isVegetarian, this.servings, this.ingredients, this.instructions);
+        return Recipe.builder()
+                .name(this.name)
+                .isVegetarian(this.isVegetarian)
+                .ingredients(this.ingredients)
+                .servings(this.servings)
+                .instructions(this.instructions)
+                .build();
     }
 }

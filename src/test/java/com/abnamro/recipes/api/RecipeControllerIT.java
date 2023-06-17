@@ -44,13 +44,14 @@ class RecipeControllerIT extends AbstractIT {
         );
 
         // Set up the mock behavior for recipeService.createRecipe
-        final Recipe mockRecipe = new Recipe(
-                request.name(),
-                request.isVegetarian(),
-                request.servings(),
-                request.ingredients(),
-                request.instructions()
-        );
+        final Recipe recipe = Recipe.builder()
+                .name(request.name())
+                .isVegetarian(request.isVegetarian())
+                .ingredients(request.ingredients())
+                .servings(request.servings())
+                .instructions(request.instructions())
+                .build();
+
 
         // Perform the POST request
         final ResponseEntity<RecipeResponse> response = this.testRestTemplate.postForEntity("/recipes", request, RecipeResponse.class);
@@ -62,11 +63,11 @@ class RecipeControllerIT extends AbstractIT {
         assertThat(responseBody).isNotNull();
         assertThat(responseBody.id()).isNotNull();
         assertThat(responseBody)
-                .returns(mockRecipe.name(), RecipeResponse::name)
-                .returns(mockRecipe.servings(), RecipeResponse::servings)
-                .returns(mockRecipe.ingredients(), RecipeResponse::ingredients)
-                .returns(mockRecipe.instructions(), RecipeResponse::instructions)
-                .returns(mockRecipe.isVegetarian(), RecipeResponse::isVegetarian);
+                .returns(recipe.name(), RecipeResponse::name)
+                .returns(recipe.servings(), RecipeResponse::servings)
+                .returns(recipe.ingredients(), RecipeResponse::ingredients)
+                .returns(recipe.instructions(), RecipeResponse::instructions)
+                .returns(recipe.isVegetarian(), RecipeResponse::isVegetarian);
 
         assertThat(responseBody.createdDate()).isNotNull();
         assertThat(responseBody.lastModifiedDate()).isNotNull();

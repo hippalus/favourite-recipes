@@ -153,13 +153,13 @@ class RecipeServiceImplTest {
 
     @NotNull
     static TestRecipes createRecipes() {
-        final Recipe recipe = new Recipe(
-                faker.food().dish(),
-                faker.bool().bool(),
-                faker.number().randomDigit(),
-                IntStream.rangeClosed(0, 10).mapToObj(i -> faker.food().ingredient()).collect(Collectors.toSet()),
-                "Test Instruction"
-        );
+        final Recipe recipe = Recipe.builder()
+                .name(faker.food().dish())
+                .isVegetarian(faker.bool().bool())
+                .ingredients(IntStream.rangeClosed(0, 10).mapToObj(i -> faker.food().ingredient()).collect(Collectors.toSet()))
+                .servings(faker.number().randomDigit())
+                .instructions(faker.shakespeare().romeoAndJulietQuote())
+                .build();
 
         final RecipeEntity recipeEntity = new RecipeEntity();
         recipeEntity.setId(UUID.randomUUID());
