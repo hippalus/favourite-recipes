@@ -10,7 +10,7 @@ import java.util.UUID;
 public record Recipe(
         UUID id,
         String name,
-        boolean isVegetarian,
+        boolean vegetarian,
         Integer servings,
         Set<String> ingredients,
         String instructions,

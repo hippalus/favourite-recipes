@@ -58,7 +58,7 @@ public class RecipeServiceImpl implements RecipeService {
     private void setAttributes(final RecipeEntity recipeEntity, final Recipe recipe) {
         recipeEntity.setName(recipe.name());
         recipeEntity.setServings(recipe.servings());
-        recipeEntity.setVegetarian(recipe.isVegetarian());
+        recipeEntity.setVegetarian(recipe.vegetarian());
         recipeEntity.setIngredients(recipe.ingredients());
         recipeEntity.setInstructions(recipe.instructions());
     }

@@ -21,7 +21,7 @@ public record RecipeResponse(
         return new RecipeResponse(
                 recipe.id(),
                 recipe.name(),
-                recipe.isVegetarian(),
+                recipe.vegetarian(),
                 recipe.servings(),
                 recipe.ingredients(),
                 recipe.instructions(),

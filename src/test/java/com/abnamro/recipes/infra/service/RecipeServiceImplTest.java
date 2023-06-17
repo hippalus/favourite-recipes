@@ -155,7 +155,7 @@ class RecipeServiceImplTest {
     static TestRecipes createRecipes() {
         final Recipe recipe = Recipe.builder()
                 .name(faker.food().dish())
-                .isVegetarian(faker.bool().bool())
+                .vegetarian(faker.bool().bool())
                 .ingredients(IntStream.rangeClosed(0, 10).mapToObj(i -> faker.food().ingredient()).collect(Collectors.toSet()))
                 .servings(faker.number().randomDigit())
                 .instructions(faker.shakespeare().romeoAndJulietQuote())

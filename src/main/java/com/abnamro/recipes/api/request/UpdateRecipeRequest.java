@@ -13,7 +13,7 @@ public record UpdateRecipeRequest(
         @NotBlank
         String name,
         @NotNull
-        Boolean isVegetarian,
+        Boolean vegetarian,
 
         @Min(1)
         Integer servings,
@@ -29,7 +29,7 @@ public record UpdateRecipeRequest(
     public Recipe toModel() {
         return Recipe.builder()
                 .name(this.name)
-                .isVegetarian(this.isVegetarian)
+                .vegetarian(this.vegetarian)
                 .ingredients(this.ingredients)
                 .servings(this.servings)
                 .instructions(this.instructions)

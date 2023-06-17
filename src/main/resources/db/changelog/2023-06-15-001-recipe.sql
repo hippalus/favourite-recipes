@@ -5,7 +5,7 @@ CREATE TABLE recipe
 (
     id                 UUID    NOT NULL,
     name               VARCHAR(255),
-    is_vegetarian      BOOLEAN NOT NULL,
+    vegetarian         BOOLEAN NOT NULL,
     servings           INTEGER,
     instructions       TEXT,
     created_date       TIMESTAMP WITHOUT TIME ZONE,

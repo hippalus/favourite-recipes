@@ -46,7 +46,7 @@ class RecipeControllerIT extends AbstractIT {
         // Set up the mock behavior for recipeService.createRecipe
         final Recipe recipe = Recipe.builder()
                 .name(request.name())
-                .isVegetarian(request.isVegetarian())
+                .vegetarian(request.vegetarian())
                 .ingredients(request.ingredients())
                 .servings(request.servings())
                 .instructions(request.instructions())
@@ -67,7 +67,7 @@ class RecipeControllerIT extends AbstractIT {
                 .returns(recipe.servings(), RecipeResponse::servings)
                 .returns(recipe.ingredients(), RecipeResponse::ingredients)
                 .returns(recipe.instructions(), RecipeResponse::instructions)
-                .returns(recipe.isVegetarian(), RecipeResponse::isVegetarian);
+                .returns(recipe.vegetarian(), RecipeResponse::isVegetarian);
 
         assertThat(responseBody.createdDate()).isNotNull();
         assertThat(responseBody.lastModifiedDate()).isNotNull();
@@ -160,7 +160,7 @@ class RecipeControllerIT extends AbstractIT {
         final RecipeResponse expected = new RecipeResponse(
                 recipeId,
                 request.name(),
-                request.isVegetarian(),
+                request.vegetarian(),
                 request.servings(),
                 request.ingredients(),
                 request.instructions(),

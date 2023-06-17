@@ -23,8 +23,8 @@ public class RecipeEntity extends AbstractAuditingEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "is_vegetarian")
-    private boolean isVegetarian;
+    @Column(name = "vegetarian")
+    private boolean vegetarian;
 
     @Column(name = "servings")
     private Integer servings;
@@ -41,7 +41,7 @@ public class RecipeEntity extends AbstractAuditingEntity {
         return new Recipe(
                 this.getId(),
                 this.name,
-                this.isVegetarian,
+                this.vegetarian,
                 this.servings,
                 this.ingredients,
                 this.instructions,

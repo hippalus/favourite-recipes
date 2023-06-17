@@ -17,7 +17,7 @@ public record RecipeSpecification(RecipeSearchCriteria searchCriteria) implement
         final List<Predicate> predicates = new ArrayList<>();
 
         if (this.searchCriteria.isVegetarian()) {
-            predicates.add(criteriaBuilder.isTrue(root.get("isVegetarian")));
+            predicates.add(criteriaBuilder.isTrue(root.get("vegetarian")));
         }
 
         if (Objects.nonNull(this.searchCriteria.servings()) && this.searchCriteria.servings() > 0) {
