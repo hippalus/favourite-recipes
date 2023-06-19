@@ -1,4 +1,4 @@
-package com.abnamro.recipes.domain.exception;
+package com.abnamro.recipes.infra.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

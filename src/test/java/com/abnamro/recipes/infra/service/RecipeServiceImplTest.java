@@ -1,10 +1,10 @@
 package com.abnamro.recipes.infra.service;
 
 import com.abnamro.recipes.common.TestFixture;
-import com.abnamro.recipes.domain.exception.ResourceNotFoundException;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.abnamro.recipes.infra.data.entity.RecipeEntity;
 import com.abnamro.recipes.infra.data.repository.RecipeJpaRepository;
+import com.abnamro.recipes.infra.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

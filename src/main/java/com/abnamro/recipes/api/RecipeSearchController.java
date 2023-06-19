@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,12 +51,12 @@ public class RecipeSearchController {
             }
     )
     @CustomPageable
-    public SearchResponse searchRecipes(@RequestParam(required = false) final Boolean vegetarian,
-                                        @RequestParam(required = false) final Integer servings,
-                                        @RequestParam(required = false) final Set<String> includedIngredients,
-                                        @RequestParam(required = false) final Set<String> excludedIngredients,
-                                        @RequestParam(required = false) final String searchText,
-                                        @PageableDefault(size = 25, sort = "lastModifiedDate", direction = Sort.Direction.DESC) final Pageable pageable
+    public ResponseEntity<SearchResponse> searchRecipes(@RequestParam(required = false) final Boolean vegetarian,
+                                                        @RequestParam(required = false) final Integer servings,
+                                                        @RequestParam(required = false) final Set<String> includedIngredients,
+                                                        @RequestParam(required = false) final Set<String> excludedIngredients,
+                                                        @RequestParam(required = false) final String searchText,
+                                                        @PageableDefault(size = 25, sort = "lastModifiedDate", direction = Sort.Direction.DESC) final Pageable pageable
     ) {
         final RecipeSearchCriteria searchCriteria = RecipeSearchCriteria.builder()
                 .vegetarian(vegetarian)
@@ -68,7 +69,7 @@ public class RecipeSearchController {
 
         final List<Recipe> searchedRecipes = this.recipeSearchService.searchRecipes(searchCriteria);
 
-        return SearchResponse.from(searchedRecipes);
+        return ResponseEntity.ok(SearchResponse.from(searchedRecipes));
     }
 
 }

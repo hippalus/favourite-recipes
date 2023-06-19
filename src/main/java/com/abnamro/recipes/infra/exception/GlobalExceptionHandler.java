@@ -1,6 +1,5 @@
-package com.abnamro.recipes.infra;
+package com.abnamro.recipes.infra.exception;
 
-import com.abnamro.recipes.domain.exception.ResourceNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.NonNull;

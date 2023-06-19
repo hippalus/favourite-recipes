@@ -1,10 +1,10 @@
 package com.abnamro.recipes.infra.service;
 
-import com.abnamro.recipes.domain.exception.ResourceNotFoundException;
 import com.abnamro.recipes.domain.model.Recipe;
 import com.abnamro.recipes.domain.service.RecipeService;
 import com.abnamro.recipes.infra.data.entity.RecipeEntity;
 import com.abnamro.recipes.infra.data.repository.RecipeJpaRepository;
+import com.abnamro.recipes.infra.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

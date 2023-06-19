@@ -27,9 +27,6 @@ and testability.
   specific infrastructure implementations.
 - **Separation of Models**: The application separates API models, domain models, and database models. This separation
   allows for flexibility and modularity, as each layer can have its own specific requirements and structures.
-- **API-First Approach**: The API is designed first using OpenAPI (formerly Swagger) to define the contract between the
-  client and server. This approach ensures a clear understanding of the API's capabilities and allows for easy
-  documentation and generation of client SDKs.
 - **PostgreSQL**: The application persists data in a PostgreSQL database. The use of a relational database allows for
   structured storage and efficient querying of recipe data.
 - **Test Containers**: Integration tests are performed using Test Containers, enabling the application to run a real
@@ -56,9 +53,32 @@ potential performance gains for read-heavy workloads.
 
 To run the application, please follow these steps:
 
+1. Clone the repository and ensure that Docker is installed and running on your machine.
+2. Navigate to the project directory by executing the following command in your terminal or command prompt:
+
+```bash
+cd favourite-recipes/
+```
+
+3. Run the following command to start the application using Docker Compose:
+
 ```bash
 docker-compose up
 ```
+
+This command will build and start the necessary containers, including the PostgreSQL database container and
+favourite recipes application container, and configure the
+datasource for the service connection.
+
+Alternatively, if you prefer to run the application in your IDE:
+
+1. Import the project into your IDE.
+2. Configure the maven, JDK 17 and language level in the project structure settings to match your setup.
+3. Run the `com.abnamro.recipes.TestFavouriteRecipesApplication.main` class to run the application in a test mode.
+
+* This class internally invokes the main class `com.abnamro.recipes.FavouriteRecipesApplication.main`, which starts up the
+  application.
+* During the test mode, a PostgreSQL test container is automatically configured for the datasource connection.
 
 ## API Documentation
 
