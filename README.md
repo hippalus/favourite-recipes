@@ -86,7 +86,7 @@ The API is thoroughly documented using OpenAPI. The documentation provides detai
 request and response formats, parameters, and example usage. To access the API documentation, please follow these steps:
 
 1. Start the application by following the instructions mentioned in the previous section.
-2. Open your web browser and navigate to the following URL: `http://localhost:8080/swagger-ui.html`.
+2. To access Swagger UI, open your web browser and go to [Swagger UI](http://localhost:8080/swagger-ui.html).
 3. The API documentation page will be displayed, allowing you to explore the available endpoints and interact with the
    API.
 
